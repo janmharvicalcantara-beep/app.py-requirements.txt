@@ -22,6 +22,17 @@ if st.button("Add Expense"):
 st.subheader("Expenses")
 st.dataframe(st.session_state.data)
 
+# Delete option
+st.subheader("Delete Expense")
+
+if not st.session_state.data.empty:
+    idx = st.selectbox("Select row to delete", st.session_state.data.index)
+    if st.button("Delete"):
+        st.session_state.data = st.session_state.data.drop(idx).reset_index(drop=True)
+
 # Summary
 st.subheader("Total Expenses")
 st.write(st.session_state.data["Amount"].sum())
+
+#pip install streamlit pandas
+#streamlit run app.py
